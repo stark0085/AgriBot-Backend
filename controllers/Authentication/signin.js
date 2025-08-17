@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from "../../models/user_reg.js";
 
@@ -24,16 +24,27 @@ export default async function signin(req, res) {
         if (!process.env.JWT_SECRET) {
             return res.status(400).json({ code: 1, message: "Missing JWT Secret" });
         }
-                
+
         const token = jwt.sign(
-            { email },
+            { email: user.email, state: user.state, district: user.district },
             process.env.JWT_SECRET,
             { expiresIn: process.env.TIME_TO_LIVE || "30d"}
         );
-
-        return res.status(200).json({ code: 0, message: 'Signed in successfully', token: token });
+        
+        return res.status(200).json({ 
+            code: 0, 
+            message: 'Signed in successfully', 
+            token: token,
+            state: user.state,
+            district: user.district  
+        });
 
     } catch (error) {
-        return res.status(500).json({ code: 1, message: "Request Timed Out", error: error });
+        console.error("SIGN-IN ERROR:", error);
+        return res.status(500).json({ 
+            code: 1, 
+            message: "An internal server error occurred.", 
+            error: error.message 
+        });
     }
 }

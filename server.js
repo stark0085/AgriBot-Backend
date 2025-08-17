@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import http from "http";
 import mongoose from 'mongoose';
 import authrouter from './routes/authRoutes/authRoutes.js';
+import msgrouter from './routes/msgRoutes/msgRoutes.js';
 
 const app = express();
 app.use(express.json())
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authrouter);
+app.use('/messages', msgrouter);
 
 app.use((req, res) => {
     res.status(404).json({ code: 1, message: "ERROR 404! Page not Found, Check the URL" });
