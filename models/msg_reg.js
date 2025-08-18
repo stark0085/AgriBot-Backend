@@ -18,5 +18,5 @@ const messageSchema = Schema({
   { timestamps: true }
 );
 
-const Message = model("message", messageSchema, 'gcBackend');
+const Message = model("message", messageSchema, 'CaptialOneData');
 export default Message;

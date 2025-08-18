@@ -24,6 +24,6 @@ const UserSchema = Schema({
         minlength: 8,
     }
 })
-const User = model('user', UserSchema, 'gcBackend')
+const User = model('user', UserSchema, 'CaptialOne')
 
 export default User;
