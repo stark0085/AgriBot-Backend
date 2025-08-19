@@ -13,12 +13,12 @@ dotenv.config()
 
 const server = http.createServer(app);
 
-server.listen(process.env.SERVER_PORT || 5000, () => {
-    console.log(`Server running on http://localhost:${process.env.SERVER_PORT || 5000}`);
+server.listen(process.env.SERVER_PORT || 8500, () => {
+    console.log(`Server running on http://localhost:${process.env.SERVER_PORT || 8500}`);
 });
 
 async function initServer() {
-    try { 
+    try {
         await mongoose.connect(process.env.DB_mongoURI);
         console.log("Connected to MongoDB");
     } catch (err) {
